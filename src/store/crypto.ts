@@ -106,9 +106,11 @@ export const useCryptoStore = defineStore('user', () => {
     try {
       const { ethereum } = window
       if (ethereum) {
+        console.log('Trying to add address')
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const lotteryContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+        console.log('Trying to add address')
         await lotteryContract.charity_add_address(address)
         console.log('charity address added: ', address)
         setLoader(false)
@@ -158,6 +160,27 @@ export const useCryptoStore = defineStore('user', () => {
     }
   }
 
+  async function customPickWinner(a: any, b: any, c: any, d: any, e: any, f: any) {
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const lotteryContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+        console.log('Picking winner')
+        const numberArray = [a, b, c, d, e, f]
+        await lotteryContract.Test_for_pickWinner(numberArray)
+        console.log('Winner generated')
+        setLoader(false)
+      }
+    }
+    catch (e) {
+      setLoader(false)
+      console.log('e', e)
+    }
+  }
+
   async function connectWallet() {
     try {
       const { ethereum } = window
@@ -199,6 +222,7 @@ export const useCryptoStore = defineStore('user', () => {
     totalBalance,
     charityBalance,
     prizeBalance,
+    customPickWinner,
   }
 })
 

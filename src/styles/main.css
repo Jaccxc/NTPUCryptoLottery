@@ -9,7 +9,15 @@ body,
 }
 
 html.dark {
-  background: #121212;
+  background-color: #FF3CAC;
+  background-image: linear-gradient(166deg, #FF3CAC 0%, #784BA0 40%, #2B86C5 100%);
+  background-attachment: fixed;
+}
+
+html {
+  background-color: #00DBDE;
+  background-image: linear-gradient(166deg, #00DBDE 0%, #FC00FF 100%);
+  background-attachment: fixed;
 }
 
 #nprogress {
